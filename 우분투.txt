@@ -5,4 +5,12 @@ docker ps
 
 localhost:3000
 가상우분투 로컬주소(엣지에서 틈)
--s id
+
+sudo su
+id(root권한)
+apt-get update
+apt-get install vim
+apt-get install gedit
+apt-get install build-essential
+
+이후 책에 수록되있음

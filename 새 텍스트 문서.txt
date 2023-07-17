@@ -1,10 +1,37 @@
+Putty
 nurion.ksc.re.kr / 22
  SSH
 myksc : https://my.ksc.re.kr
 
+sedu04
+kisti1234#@
+0135
+
+터미널 : cd /scratch/sedu04/박민수
+module av
+module list
+module load gcc/8.3.0
+module purgem
+
 https://raw.githubusercontent.com/kiwenlau/MPI_PI/master/Montecarlo/mpi_pi.c
 
 https://drive.google.com/file/d/1DKZLIFE3rnAb9KIHufEx4EHhD7rCmsHF/view?usp=sharing
+
+example code
+#include <stdio.h>
+#include <mpi.h>
+
+main(int argc,char **argv)
+{
+    int node;
+
+    MPI
+
+
+}
+
+
+
 
 // This program is to caculate PI using MPI
 // The algorithm is based on Monte Carlo method. The Monte Carlo method randomly picks up a large number of points in a square. It only counts the ratio of pints in side the circule.
