@@ -1,3 +1,55 @@
 Command "python setup.py egg_info" failed with error code 1 in /tmp/pip-build-7XDC_K/pip/
 You are using pip version 8.1.2, however version 23.2 is available.
 You should consider upgrading via the 'pip install --upgrade pip' command.
+
+
+[sedu04@login05 박민수]$ pip install
+You must give at least one requirement to install (see "pip help install")
+You are using pip version 8.1.2, however version 23.2 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+[sedu04@login05 박민수]$ pip install --upgrade pip
+Collecting pip
+  Using cached https://files.pythonhosted.org/packages/3d/ab/21fa8d1ecf5648559f056fda732b0f9fca0585eb2688252e67f70e74deaf/pip-23.2.tar.gz
+    Complete output from command python setup.py egg_info:
+    Traceback (most recent call last):
+      File "<string>", line 1, in <module>
+      File "/tmp/pip-build-iVibww/pip/setup.py", line 7
+        def read(rel_path: str) -> str:
+                         ^
+    SyntaxError: invalid syntax
+    
+    ----------------------------------------
+Command "python setup.py egg_info" failed with error code 1 in /tmp/pip-build-iVibww/pip/
+You are using pip version 8.1.2, however version 23.2 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+[sedu04@login05 박민수]$ pip uninstall
+You must give at least one requirement to uninstall (see "pip help uninstall")
+You are using pip version 8.1.2, however version 23.2 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+[sedu04@login05 박민수]$ pip uninstall pip
+Uninstalling pip-8.1.2:
+  /usr/bin/pip
+  /usr/bin/pip2
+  /usr/bin/pip2.7
+  /usr/lib/python2.7/site-packages/pip
+  /usr/lib/python2.7/site-packages/pip-8.1.2-py2.7.egg-info
+Proceed (y/n)? y  
+Exception:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/pip/basecommand.py", line 215, in main
+    status = self.run(options, args)
+  File "/usr/lib/python2.7/site-packages/pip/commands/uninstall.py", line 76, in run
+    requirement_set.uninstall(auto_confirm=options.yes)
+  File "/usr/lib/python2.7/site-packages/pip/req/req_set.py", line 336, in uninstall
+    req.uninstall(auto_confirm=auto_confirm)
+  File "/usr/lib/python2.7/site-packages/pip/req/req_install.py", line 742, in uninstall
+    paths_to_remove.remove(auto_confirm)
+  File "/usr/lib/python2.7/site-packages/pip/req/req_uninstall.py", line 115, in remove
+    renames(path, new_path)
+  File "/usr/lib/python2.7/site-packages/pip/utils/__init__.py", line 267, in renames
+    shutil.move(old, new)
+  File "/usr/lib64/python2.7/shutil.py", line 302, in move
+    os.unlink(src)
+OSError: [Errno 13] Permission denied: '/usr/bin/pip'
+You are using pip version 8.1.2, however version 23.2 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
