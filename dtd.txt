@@ -1,0 +1,3 @@
+Command "python setup.py egg_info" failed with error code 1 in /tmp/pip-build-7XDC_K/pip/
+You are using pip version 8.1.2, however version 23.2 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
