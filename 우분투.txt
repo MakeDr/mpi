@@ -1,0 +1,8 @@
+docker run -it ubuntu
+
+docker run -d -p 3000:3000 lscr.io/linuxserver/webtop:ubuntu-xfce
+docker ps
+
+localhost:3000
+가상우분투 로컬주소(엣지에서 틈)
+-s id
