@@ -53,3 +53,7 @@ Traceback (most recent call last):
 OSError: [Errno 13] Permission denied: '/usr/bin/pip'
 You are using pip version 8.1.2, however version 23.2 is available.
 You should consider upgrading via the 'pip install --upgrade pip' command.
+
+
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python get-pip.py
