@@ -1,0 +1,1 @@
+print("Hello, Message Processing Interface!")
