@@ -14,3 +14,8 @@ apt-get install gedit
 apt-get install build-essential
 
 이후 책에 수록되있음
+vim test.tr
+i
+Esc 후 
+:wq
+:q!

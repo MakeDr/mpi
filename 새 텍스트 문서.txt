@@ -11,7 +11,7 @@ kisti1234#@
 module av
 module list
 module load gcc/8.3.0
-module purgem
+module purge
 
 https://raw.githubusercontent.com/kiwenlau/MPI_PI/master/Montecarlo/mpi_pi.c
 

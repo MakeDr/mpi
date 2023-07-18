@@ -84,18 +84,19 @@ camera = np.array([0, 0, 1])
 #camera = np.array([0, 1, 1])
 light = { 'position': np.array([5, 5, 5]), 'ambient': np.array([1, 1, 1]), 'diffuse': np.array([1, 1, 1]), 'specular': np.array([1, 1, 1]) }
 objects = [
-    { 'center': np.array([-0.2, 0, -1]), 'radius': 0.2, 'ambient': np.array([0.1, 0, 0]), 'diffuse': np.array([0.7, 1, 0]), 'specular': np.array([1, 1, 1]), 'shininess': 80, 'reflection': 0.1 },
-    { 'center': np.array([0.1, -0.3, 0]), 'radius': 0.1, 'ambient': np.array([0.1, 0, 0.1]), 'diffuse': np.array([0.7, 0, 0.7]), 'specular': np.array([1, 1, 1]), 'shininess': 100, 'reflection': 0.5 },
-    { 'center': np.array([0.5, 0, -1]), 'radius': 0.5, 'ambient': np.array([0.1, 0, 0.1]), 'diffuse': np.array([0.7, 0.7, 0.7]), 'specular': np.array([1, 1, 1]), 'shininess': 100, 'reflection': 0.5 },
-    { 'center': np.array([-0.3, 0, 0]), 'radius': 0.15, 'ambient': np.array([0, 0.1, 0]), 'diffuse': np.array([0, 0.6, 0]), 'specular': np.array([1, 1, 1]), 'shininess': 100, 'reflection': 0.5 },
-    { 'center': np.array([0, -9000, 0]), 'radius': 9000 - 0.7, 'ambient': np.array([0.1, 0.1, 0.1]), 'diffuse': np.array([0.6, 0.6, 0.6]), 'specular': np.array([1, 1, 1]), 'shininess': 100, 'reflection': 0.5 }
+    { 'center': np.array([-0.2, 0, -1]), 'radius': 0.2, 'ambient': np.array([0, 1, 0]), 'diffuse': np.array([0.7, 1, 0]), 'specular': np.array([1, 1, 1]), 'shininess': 80, 'reflection': 0.1 },
+    { 'center': np.array([0.1, -0.3, 0]), 'radius': 0.1, 'ambient': np.array([1, 0, 0]), 'diffuse': np.array([0.7, 0, 0.7]), 'specular': np.array([1, 1, 1]), 'shininess': 100, 'reflection': 0.5 },
+    { 'center': np.array([0.5, 0, -1]), 'radius': 0.5, 'ambient': np.array([1, 0, 1]), 'diffuse': np.array([0.7, 0.7, 0.7]), 'specular': np.array([1, 1, 1]), 'shininess': 100, 'reflection': 0.5 },
+    { 'center': np.array([-0.3, 0, 0]), 'radius': 0.15, 'ambient': np.array([0, 0, 1]), 'diffuse': np.array([0, 0.6, 0]), 'specular': np.array([1, 1, 1]), 'shininess': 100, 'reflection': 0.5 },
+    { 'center': np.array([0, -9000, 0]), 'radius': 9000 - 0.7, 'ambient': np.array([1, 1, 1]), 'diffuse': np.array([0.6, 0.6, 0.6]), 'specular': np.array([1, 1, 1]), 'shininess': 100, 'reflection': 0.5 }
 ]
 
+ratio = float(width) / height #비율
 
-ratio = float(width) / height 
 screen = (-1, 1 / ratio, 1, -1 / ratio) # left, top, right, bottom
 
-image = np.zeros((height, width, 3))
+image = np.zeros((height, width, 3)) # 3차원 벡터에 0에 h 1에 w을 넣음 (높이,너비 순)
+
 
 # 정적 분할 방식을 사용하여 각 프로세스에게 할당될 행(row) 범위 계산
 rows_per_process = height // size
@@ -108,10 +109,10 @@ X = np.linspace(screen[0], screen[2], width)
 
 # 레이 트레이싱을 수행하는 부분을 각 프로세스에게 할당된 행 범위로 제한
 for i in range(start_row, end_row):
-    y = Y[i]
-    for j, x in enumerate(X):
-        color = ray_tracing(x, y)
-        image[i, j] = np.clip(color, 0, 1)
+	y = Y[i]
+	for j, x in enumerate(X):
+		color = ray_tracing(x, y)
+		image[i, j] = np.clip(color, 0, 1)
 
 # 각 프로세스에서 계산된 부분 이미지를 모두 수집하여 랭크 0 프로세스에서 합침
 result_image = None
@@ -125,6 +126,5 @@ if rank == 0:
     plt.imsave('image3.png', result_image)
 
 end_time = MPI.Wtime()
-
 if rank == 0:
     print("Overall elapsed time: " + str(end_time - start_time))
