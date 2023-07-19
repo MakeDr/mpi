@@ -99,10 +99,11 @@ image = np.zeros((height, width, 3)) # 3차원 벡터에 0에 h 1에 w을 넣음
 
 
 # 정적 분할 방식을 사용하여 각 프로세스에게 할당될 행(row) 범위 계산
-rows_per_process = height // size
-start_row = rank * rows_per_process
-end_row = start_row + rows_per_process
+N = height // size 
+start_row = rank * comm.scan(N) 
+end_row = start_row + N
 
+print("{} : {},{},{}".format(rank,N,start_row,end_row))
 # Y와 X 배열 생성
 Y = np.linspace(screen[1], screen[3], height)
 X = np.linspace(screen[0], screen[2], width)
@@ -114,12 +115,13 @@ for i in range(start_row, end_row):
 		color = ray_tracing(x, y)
 		image[i, j] = np.clip(color, 0, 1)
 
-# 각 프로세스에서 계산된 부분 이미지를 모두 수집하여 랭크 0 프로세스에서 합침
+# 랭크 0 프로세스에서 결과 이미지를 수집할 버퍼 생성
 result_image = None
 if rank == 0:
-    result_image = np.empty_like(image)
+    result_image = np.empty((height, width, 3))
 
-comm.Gather(image[start_row:end_row], result_image, root=0)
+# 랭크 0 프로세스에서 모든 부분 이미지 수집
+comm.Gatherv(image[start_row:end_row], result_image, root=0)
 
 # 랭크 0 프로세스에서 결과 이미지를 저장
 if rank == 0:

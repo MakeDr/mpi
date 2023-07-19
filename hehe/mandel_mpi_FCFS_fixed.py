@@ -83,7 +83,7 @@ xmax = x + scale
 ymin = y - scale
 ymax = y + scale
 
-if size < 4 :
+if size < 3 :
     # 예시 주석: 농장이 하나일 경우(농가가 독자적으로 일을 함)
     if rank == 0:
         # 전문가 주석: 프로세스 0이 관리자 프로세스와 작업자 프로세스의 역할을 겸한다.
