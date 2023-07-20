@@ -1,0 +1,12 @@
+def sphere_intersect(center, radius, ray_origin, ray_direction):
+    oc = ray_origin - center
+    a = np.dot(ray_direction, ray_direction)
+    b = 2.0 * np.dot(oc, ray_direction)
+    c = np.dot(oc, oc) - radius ** 2
+    discriminant = b ** 2 - 4 * a * c
+    if discriminant > 0:
+        t1 = (-b + np.sqrt(discriminant)) / (2 * a)
+        t2 = (-b - np.sqrt(discriminant)) / (2 * a)
+        if t1 > 0 and t2 > 0:
+            return min(t1, t2)
+    return None
